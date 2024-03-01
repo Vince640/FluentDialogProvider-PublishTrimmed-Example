@@ -12,4 +12,9 @@
     <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.4.1" />
   </ItemGroup>
 
+  <!-- I try to disable the trimming of the FluentUI components -->
+  <ItemGroup>
+	  <TrimmerRootAssembly Include="Microsoft.FluentUI.AspNetCore.Components" />
+  </ItemGroup>
+	
 </Project>

@@ -3,11 +3,17 @@
 @inject IDialogService DialogService
 
 <FluentButton OnClick="@ShowConfirmationAsync" Appearance="Appearance.Accent">Confirmation</FluentButton>
+<FluentLabel>@_result</FluentLabel>
 
 @code {
+    private string _result;
+
     private async Task ShowConfirmationAsync()
     {
+        // I try to fool the trimmer function
+        // var temp1 = new MessageBox() { Content = new() { Message = "abc" } };
 
+        // Show the dialog
         var confirmationDialog = await DialogService.ShowConfirmationAsync(
                message: "Confirm",
                primaryText: "Accept",
@@ -15,7 +21,6 @@
                title: "Confirmation Dialog Box");
 
         var confirmationResult = await confirmationDialog.Result;
-        if (confirmationResult.Cancelled)
-            return;
+        _result = confirmationResult.Cancelled ? "Cancelled" : "Accepted";
     }
 }
