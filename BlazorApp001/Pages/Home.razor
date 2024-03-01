@@ -1,0 +1,21 @@
+﻿@page "/"
+
+@inject IDialogService DialogService
+
+<FluentButton OnClick="@ShowConfirmationAsync" Appearance="Appearance.Accent">Confirmation</FluentButton>
+
+@code {
+    private async Task ShowConfirmationAsync()
+    {
+
+        var confirmationDialog = await DialogService.ShowConfirmationAsync(
+               message: "Confirm",
+               primaryText: "Accept",
+               secondaryText: "Cancel",
+               title: "Confirmation Dialog Box");
+
+        var confirmationResult = await confirmationDialog.Result;
+        if (confirmationResult.Cancelled)
+            return;
+    }
+}
